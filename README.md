@@ -1,0 +1,1 @@
+[![Hi, I'm Angelo. I live in Bekasi, Indonesia. I am a fullstack web engineer. Though, I have a lot of interests including community management. You can find my socials at https://angeloanan.xyz/contact. Thanks for stopping by, have a great day!](./out/output.svg)](https://angeloanan.xyz/contact)
