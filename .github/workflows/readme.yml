@@ -2,7 +2,7 @@ name: Update readme
 
 on:
   schedule:
-    - cron: "0 4 * * *"
+    - cron: "0 10,22 * * *"
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       - name: Generate readme
         env:
           WEATHER_API_TOKEN: ${{ secrets.WEATHER_API_TOKEN }}
-        run: node build-svg.js
+        run: node ./src/index.js
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
