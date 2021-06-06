@@ -8,7 +8,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const qty = require('js-quantities')
 
-const WEATHER_API_TOKEN = "tvOYGbeIYwNAsm7LBMTD3I2JfCAcYyOv"
+const WEATHER_API_TOKEN = process.env.WEATHER_API_TOKEN
 const WEATHER_DOMAIN = 'http://dataservice.accuweather.com'
 const WEATHER_EMOJIS = {
   1: '☀️',
@@ -51,12 +51,14 @@ const dayBubbleWidths = {
   Sunday: 230,
 }
 
-const todayDay = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date())
 const locationKey = '202574'
 
 fetch(`${WEATHER_DOMAIN}/forecasts/v1/daily/1day/${locationKey}?apikey=${WEATHER_API_TOKEN}`)
   .then(response => response.json())
-  .then(response => {
+  .then(async response => {
+    const todayDay = (await (await fetch("https://www.timeapi.io/api/Time/current/zone?timeZone=Asia:Jakarta")).json()).dayOfWeek
+
+    console.log('Today is', todayDay)
     console.log(response)
     
     const degF = Math.round(response?.DailyForecasts[0]?.Temperature?.Maximum?.Value ?? 86)

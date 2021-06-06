@@ -26,8 +26,8 @@ jobs:
         uses: EndBug/add-and-commit@v4
         with:
           author_name: Christopher Angelo
-          author_email: angelo@angeolanan.xyz
-          message: "Auto updating my readme"
+          author_email: angelo@angeloanan.xyz
+          message: "chore(automation): update readme image"
           add: "*.svg"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
