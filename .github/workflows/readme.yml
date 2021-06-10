@@ -22,12 +22,24 @@ jobs:
           WEATHER_API_TOKEN: ${{ secrets.WEATHER_API_TOKEN }}
         run: node ./src/index.js
 
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v4
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v3
         with:
-          author_name: Christopher Angelo
-          author_email: angelo@angeloanan.xyz
-          message: "chore(automation): update readme image"
-          add: "*.svg"
+          gpg-private-key: ${{ secrets.GPG_SECRET }}
+          passphrase: ${{ secrets.GPG_PASSWORD }}
+          git-user-signingkey: true
+          git-commit-gpgsign: true
+          git-push-gpgsign: false
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: Christopher Angelo
+          commit_user_email: angelo@angeloanan.xyz
+          commit_author: angelo@angeloanan.xyz
+          commit_message: "chore(automation): update readme image"
+          commit_options: "-S"
+          file_pattern: "*.svg"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
